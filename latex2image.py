@@ -1,18 +1,25 @@
+#!/usr/bin/env python3
+
 import pathlib
 import tkinter as tk
 import tkinter.ttk as ttk
 import pygubu
+import os
 
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "latex2image.ui"
 
 TEMP_IMG = PROJECT_PATH / "formula.png"
 
+os.chdir(PROJECT_PATH)
+
+
 def convertor(latex: str):
     import matplotlib.mathtext as mt
     from PIL import Image, ImageTk
 
     mt.math_to_image(f"${latex}$", TEMP_IMG, dpi=300, format="png")
+    
     tk_img = ImageTk.PhotoImage(Image.open(TEMP_IMG))
     return tk_img
 
@@ -38,7 +45,9 @@ class Latex2ImageApp:
     def callback(self, event):
         text = self.builder.get_object('text1').get('1.0', 'end-1c')
         latex_img = convertor(text)
-        self.builder.get_object('canvas1').create_image(10, 10, image=latex_img, anchor="nw")
+        canvas = self.builder.get_object('canvas1')
+        canvas.delete(tk.ALL)
+        canvas.create_image(10, 10, image=latex_img, anchor="nw")
         
 
 if __name__ == '__main__':

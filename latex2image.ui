@@ -17,6 +17,8 @@
         <property name="height">120</property>
         <property name="width">300</property>
         <layout manager="pack">
+          <property name="expand">true</property>
+          <property name="fill">both</property>
           <property name="side">bottom</property>
         </layout>
       </object>
