@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.5" author="PygubuDesigner 0.41.4">
+  <project>
+    <settings />
+    <customwidgets />
+    <resources />
+  </project>
+  <object class="tk.Toplevel" id="toplevel1">
+    <property name="height">200</property>
+    <property name="minsize">450|320</property>
+    <property name="padx">20</property>
+    <property name="pady">20</property>
+    <property name="title" translatable="yes">Latex2Image</property>
+    <child>
+      <object class="tk.Canvas" id="canvas1">
+        <property name="background">#fff</property>
+        <property name="height">120</property>
+        <property name="width">300</property>
+        <layout manager="pack">
+          <property name="side">bottom</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="label1">
+        <property name="text" translatable="yes">输入 Latex 公式</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Text" id="text1">
+        <property name="background">#fff</property>
+        <property name="height">5</property>
+        <property name="width">50</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Button" id="button1">
+        <property name="text" translatable="yes">转换</property>
+        <bind sequence="&lt;1&gt;" handler="callback" add="" />
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
