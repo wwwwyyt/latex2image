@@ -5,19 +5,21 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import pygubu
 import os
+import matplotlib
+import matplotlib.mathtext as mt
+import matplotlib.font_manager as fm
+from PIL import Image, ImageTk
 
+
+# 初始化
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "latex2image.ui"
-
 TEMP_IMG = PROJECT_PATH / "formula.png"
 
 os.chdir(PROJECT_PATH)
 
-
+    
 def convertor(latex: str):
-    import matplotlib.mathtext as mt
-    from PIL import Image, ImageTk
-
     mt.math_to_image(f"${latex}$", TEMP_IMG, dpi=300, format="png")
     
     tk_img = ImageTk.PhotoImage(Image.open(TEMP_IMG))
