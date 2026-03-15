@@ -9,6 +9,7 @@ import matplotlib
 import matplotlib.mathtext as mt
 import matplotlib.font_manager as fm
 from PIL import Image, ImageTk
+import pyperclipimg
 
 
 # 初始化
@@ -18,7 +19,7 @@ TEMP_IMG = PROJECT_PATH / "formula.png"
 
 os.chdir(PROJECT_PATH)
 
-    
+
 def convertor(latex: str):
     mt.math_to_image(f"${latex}$", TEMP_IMG, dpi=300, format="png")
     
@@ -41,15 +42,22 @@ class Latex2ImageApp:
         # Connect callbacks
         builder.connect_callbacks(self)
 
+        self.latex_img = None
+
     def run(self):
         self.mainwindow.mainloop()
 
-    def callback(self, event):
+    def callback1(self, event):
         text = self.builder.get_object('text1').get('1.0', 'end-1c')
-        latex_img = convertor(text)
+        self.latex_img = convertor(text)
         canvas = self.builder.get_object('canvas1')
         canvas.delete(tk.ALL)
-        canvas.create_image(10, 10, image=latex_img, anchor="nw")
+        canvas.create_image(10, 10, image=self.latex_img, anchor="nw")
+
+    def callback2(self, event):
+        if self.latex_img:
+            img = Image.open(TEMP_IMG)
+            pyperclipimg.copy(img)
         
 
 if __name__ == '__main__':
